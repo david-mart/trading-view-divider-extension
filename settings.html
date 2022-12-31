@@ -2,7 +2,7 @@
 <html>
   <head>
     <style>
-      .content { 
+      .content {
         margin: 20px auto;
         max-width: 500px;
       }
@@ -38,6 +38,31 @@
         margin-top: 10px;
         margin-left: 10px;
       }
+      .hint {
+        opacity: 60%;
+        font-size: 10px;
+        margin-top: -10px;
+        margin-left: 4px;
+      }
+      .mt-1 {
+        margin-top: 10px;
+      }
+      .chart-select {
+        opacity: 0;
+      }
+      .chart-select input {
+        margin-top: 1px;
+        margin-left: 4px;
+      }
+      .chart-select span {
+        padding-left: 6px;
+      }
+      #multiple:checked ~ .chart-select {
+        display: flex;
+        opacity: 1;
+        align-items: center;
+        margin-left: 10px;
+      }
     </style>
   </head>
   <body>
@@ -63,9 +88,24 @@
           <input type="text" id="symbol_two" />
         </div>
       </div>
-      <div style="opacity: 60%;">
+      <div class="hint">
         <p>Hint: use <b>{{SYMBOL}}</b> for current selected symbol.</p>
       </div>
+
+      <div class="row mt-1">
+        <div class="sub-row">
+          <input type="checkbox" id="multiple" />
+          <label for="multiple">Handle multiple charts</label>
+          <div class="chart-select">
+            <span >Replace in:</span>
+            <input type="radio" id="left" name="chartIdx" value="0" />
+            <label for="left">Left Chart</label>
+            <input type="radio" id="right" name="chartIdx" value="1" />
+            <label for="right">Right Chart</label>
+          </div>
+        </div>
+      </div>
+
       <div class="row">
         <button id="reset">Reset</button>
         <button id="save">Save</button>

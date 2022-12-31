@@ -3,6 +3,9 @@ const default_values = {
   symbol_operator: "/",
   symbol_two: "AMEX:SPY",
   auto: false,
+  multiple: false,
+  left: true,
+  right: false,
 };
 
 function restore_options() {
@@ -10,8 +13,10 @@ function restore_options() {
     document.getElementById("symbol_one").value = items.symbol_one;
     document.getElementById("symbol_operator").value = items.symbol_operator;
     document.getElementById("symbol_two").value = items.symbol_two;
-    console.log(items.auto);
     document.getElementById("auto").checked = items.auto;
+    document.getElementById("multiple").checked = items.multiple;
+    document.getElementById("left").checked = items.left;
+    document.getElementById("right").checked = items.right;
   });
 }
 
@@ -21,6 +26,9 @@ function set_options() {
     symbol_operator: document.getElementById("symbol_operator").value,
     symbol_two: document.getElementById("symbol_two").value,
     auto: document.getElementById("auto").checked,
+    multiple: document.getElementById("multiple").checked,
+    left: document.getElementById("left").checked,
+    right: document.getElementById("right").checked,
   });
 }
 

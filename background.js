@@ -16,12 +16,12 @@ chrome.action.onClicked.addListener(async (tab) => {
     await chrome.storage.sync.set({ [tab.id]: true });
     chrome.scripting.executeScript({
       target: { tabId: tab.id },
-      files: ["auto.js"],
+      files: ["handle-multiple.js", "symbols.js", "auto.js"],
     });
   } else {
     chrome.scripting.executeScript({
       target: { tabId: tab.id },
-      files: ["manual.js"],
+      files: ["handle-multiple.js", "symbols.js", "manual.js"],
     });
   }
 });
