@@ -1,31 +1,37 @@
-var observeDOM = (function () {
+var observeDOM = (el, cb) => {
   var MutationObserver =
     window.MutationObserver || window.WebKitMutationObserver;
 
-  return function (obj, callback) {
-    if (!obj || obj.nodeType !== 1) return;
+  if (!el || el.nodeType !== 1) return;
 
-    if (MutationObserver) {
-      var mutationObserver = new MutationObserver(callback);
+  if (MutationObserver) {
+    obs1 = new MutationObserver(cb);
 
-      mutationObserver.observe(obj, { childList: true, subtree: true });
-      return mutationObserver;
-    }
-
-    else if (window.addEventListener) {
-      obj.addEventListener("DOMNodeInserted", callback, false);
-      obj.addEventListener("DOMNodeRemoved", callback, false);
-    }
-  };
-})();
+    const connect = () => {
+      obs1.observe(el, { childList: true, subtree: true });
+    };
+    const disconnect = () => {
+      obs1.disconnect();
+    };
+    return { connect, disconnect };
+  } else if (window.addEventListener) {
+    el.addEventListener("DOMNodeInserted", cb, false);
+    el.addEventListener("DOMNodeRemoved", cb, false);
+  }
+};
 
 runListener = () => {
-  observeDOM(
+  a = observeDOM(
     document.getElementById("header-toolbar-symbol-search"),
-    (b, v) => {
+    () => {
+      a.disconnect();
       setSymbol();
+      setTimeout(() => {
+        a.connect();
+      }, 500);
     }
   );
+  a.connect();
 };
 
 startAuto = async () => {
@@ -37,7 +43,6 @@ startAuto = async () => {
   if (!a) {
     const interval = setInterval(() => {
       a = document.getElementById("header-toolbar-symbol-search");
-      console.log(a);
       if (a) {
         runListener();
         clearInterval(interval);

@@ -1,6 +1,6 @@
 {
   "name": "TWM Switcher",
-  "version": "1.1",
+  "version": "1.2",
   "permissions": ["storage", "activeTab", "scripting", "tabs"],
   "content_scripts": [
     {

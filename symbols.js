@@ -1,4 +1,11 @@
-// document.querySelector('#overlap-manager-root').remove();
+getMarket = () =>
+  new Promise((res) => {
+    setTimeout(() => {
+      market = document.querySelector('[data-name="details-exchange"]');
+      res(market.textContent);
+    }, 700);
+  });
+
 getSymbols = async () => {
   symbol = window.localStorage.getItem("tradingview.editchart.model.symbol");
   if (!symbol) {
@@ -6,11 +13,13 @@ getSymbols = async () => {
     if (!!search.childNodes[1]) {
       symbol = search.childNodes[1].textContent;
     }
-    if (!symbol) return;
-    market = document.querySelector('[data-name="details-exchange"]');
-    if (market) {
-      symbol = market.textContent + ":" + symbol;
-    }
+    // if (!symbol) return;
+    // const market = await getMarket();
+    // market = document.querySelector('[data-name="details-exchange"]');
+    // // console.log(market);
+    // if (market) {
+    //   symbol = market.textContent + ":" + symbol;
+    // }
   }
   if (!symbol) return;
   const { symbol_one, symbol_two, symbol_operator } =
